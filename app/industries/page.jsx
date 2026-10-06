@@ -26,7 +26,7 @@ export default function IndustriesPage() {
         <Container className="grid gap-7 lg:grid-cols-2">
           {industries.map((ind, i) => (
             <Reveal key={ind.slug} delay={(i % 2) * 70}>
-              <article className="card-hover h-full rounded-3xl border border-border bg-card p-8 shadow-soft">
+              <article id={ind.slug} className="card-hover h-full scroll-mt-24 rounded-3xl border border-border bg-card p-8 shadow-soft">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-port text-white dark:bg-amber dark:text-ink">
                   <Icon name={ind.icon} className="h-6 w-6" />
                 </span>

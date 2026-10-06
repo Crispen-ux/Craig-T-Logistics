@@ -5,6 +5,8 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CookieConsent from "@/components/cookie-consent";
 import Analytics from "@/components/analytics";
+import MobileCta from "@/components/mobile-cta";
+import SwRegister from "@/components/sw-register";
 import { brand, wa } from "@/lib/config";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
@@ -30,6 +32,14 @@ export const metadata = {
     url: brand.site,
   },
   twitter: { card: "summary_large_image" },
+  applicationName: "Craig-T Logistics",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": "Craig-T Logistics",
+    "mobile-web-app-capable": "yes",
+    "format-detection": "telephone=no",
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
@@ -39,7 +49,12 @@ export const metadata = {
   },
 };
 
-export const viewport = { themeColor: "#10222E", width: "device-width", initialScale: 1 };
+export const viewport = {
+  themeColor: "#10222E",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -60,7 +75,7 @@ export default function RootLayout({ children }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with Craig-T Logistics on WhatsApp"
-            className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition-transform hover:scale-105"
+            className="fixed bottom-5 right-5 z-40 hidden h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition-transform hover:scale-105 lg:grid"
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm4.8 13.6c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-3.1-.7-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.2.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z" />
@@ -68,6 +83,8 @@ export default function RootLayout({ children }) {
           </a>
           <CookieConsent />
           <Analytics />
+          <MobileCta />
+          <SwRegister />
         </ThemeProvider>
       </body>
     </html>

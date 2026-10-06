@@ -104,7 +104,7 @@ export default function SiteHeader() {
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-white hover:bg-white/10 lg:hidden" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full text-white hover:bg-white/10 lg:hidden" aria-label="Open menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>

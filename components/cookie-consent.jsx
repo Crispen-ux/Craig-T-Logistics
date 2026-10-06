@@ -35,7 +35,7 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-labelledby="cookie-title"
-      className="fixed bottom-4 left-4 right-4 z-50 max-w-lg rounded-3xl border border-border bg-card p-6 shadow-lift sm:right-auto"
+      className="fixed bottom-24 left-4 right-4 lg:bottom-4 z-50 max-w-lg rounded-3xl border border-border bg-card p-6 shadow-lift sm:right-auto"
     >
       <h2 id="cookie-title" className="font-display text-lg font-extrabold">
         Your privacy, your choice

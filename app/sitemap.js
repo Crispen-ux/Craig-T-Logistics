@@ -11,6 +11,7 @@ export default function sitemap() {
     "/tools",
     "/industries",
     "/faq",
+    "/sitemap",
     "/terms",
     "/about",
     "/contact",

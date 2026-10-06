@@ -18,6 +18,7 @@ const guides = [
   ["Vehicle & fleet guide", "/fleet"],
   ["Transit & load tools", "/tools"],
   ["All services", "/services"],
+  ["Site map", "/sitemap"],
   ["Conditions of carriage", "/terms"],
   ["Privacy notice (POPIA)", "/privacy"],
 ];
@@ -66,7 +67,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col gap-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container flex flex-col gap-4 py-6 pb-24 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between lg:pb-6">
           <p>© {new Date().getFullYear()} {brand.name}. All rights reserved.</p>
           <p className="max-w-xl">
             Distances and transit times shown on this site are indicative planning estimates and are confirmed per load.
@@ -81,10 +82,10 @@ function FooterColumn({ title, items }) {
   return (
     <div>
       <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber">{title}</h3>
-      <ul className="mt-5 space-y-3 text-sm text-white/70">
+      <ul className="mt-4 space-y-1 text-sm text-white/70">
         {items.map(([label, href]) => (
           <li key={href}>
-            <Link href={href} className="transition-colors hover:text-amber">
+            <Link href={href} className="flex min-h-[44px] items-center transition-colors hover:text-amber">
               {label}
             </Link>
           </li>
