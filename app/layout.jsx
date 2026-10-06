@@ -1,20 +1,75 @@
 import "./globals.css";
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
-import Link from "next/link";
-import Nav from "../components/Nav";
-import CookieConsent from "../components/CookieConsent";
-import Analytics from "../components/Analytics";
-import { brand, wa } from "../lib/config";
-const d = Bricolage_Grotesque({ subsets: ["latin"], variable: "--display" });
-const b = DM_Sans({ subsets: ["latin"], variable: "--body" });
-export const metadata = { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://craigtlogistics.co.za"), title: { default: "Craig-T Logistics | Long & Short Distance Freight South Africa", template: "%s | Craig-T Logistics" },
-  description: "Long-distance and short-distance road freight across South Africa. Full loads, part loads and reliable delivery. Get a quote in one working day.", openGraph: { siteName: "Craig-T Logistics", locale: "en_ZA", type: "website" },
-  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }, { url: "/icon.png", type: "image/png", sizes: "512x512" }], apple: "/apple-icon.png" } };
-export default function Root({ children }) {
-  return (<html lang="en-ZA" className={`${d.variable} ${b.variable}`}><body>
-    <Nav /><main>{children}</main>
-    <footer><div className="wrap"><div><img className="logoimg" src="/logo-reversed.svg" alt="Craig-T Logistics" /><br/>{brand.address}<br/>{brand.phone} · {brand.email}</div>
-      <div><Link href="/about">About</Link><br/><Link href="/blog">Blog</Link><br/><Link href="/contact">Contact</Link><br/><Link href="/privacy">Privacy &amp; POPIA</Link><br/>© {new Date().getFullYear()} {brand.name}</div></div></footer>
-    <a className="wabtn" href={wa()} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm4.800 13.600c-.2.600-1.200 1.100-1.700 1.200-.5.100-1 .1-3.100-.7-2.600-1.100-4.300-3.800-4.400-4-.1-.2-1-1.400-1-2.600s.6-1.800.9-2.100c.2-.2.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 1.900c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.200 1.600 2 1.100.9 2 1.200 2.300 1.400.3.100.5.100.6-.1l.9-1c.2-.2.400-.2.600-.1l1.800.9c.3.100.5.200.5.300.1.200.1.700-.1 1.200Z"/></svg></a>
-    <CookieConsent /><Analytics /></body></html>);
+import { ThemeProvider } from "@/components/theme-provider";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import CookieConsent from "@/components/cookie-consent";
+import Analytics from "@/components/analytics";
+import { brand, wa } from "@/lib/config";
+
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = DM_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+
+export const metadata = {
+  metadataBase: new URL(brand.site),
+  title: { default: "Craig-T Logistics | Long & Short Distance Freight South Africa", template: "%s | Craig-T Logistics" },
+  description:
+    "Long-distance and short-distance road freight across South Africa. Full loads, part loads, cross-border and container haulage. Get a quote in one working day.",
+  keywords: [
+    "freight South Africa",
+    "road freight Gauteng",
+    "long distance haulage",
+    "part loads",
+    "cross-border freight SADC",
+    "logistics Johannesburg",
+  ],
+  openGraph: {
+    siteName: "Craig-T Logistics",
+    locale: "en_ZA",
+    type: "website",
+    url: brand.site,
+  },
+  twitter: { card: "summary_large_image" },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-icon.png",
+  },
+};
+
+export const viewport = { themeColor: "#10222E", width: "device-width", initialScale: 1 };
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en-ZA" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+      <body className="min-h-screen bg-background font-body text-foreground">
+        <ThemeProvider>
+          <a
+            href="#main"
+            className="sr-only z-[100] rounded-full bg-amber px-4 py-2 text-sm font-bold text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          >
+            Skip to content
+          </a>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+          <a
+            href={wa()}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with Craig-T Logistics on WhatsApp"
+            className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition-transform hover:scale-105"
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm4.8 13.6c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-3.1-.7-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.2.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z" />
+            </svg>
+          </a>
+          <CookieConsent />
+          <Analytics />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }
