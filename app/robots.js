@@ -1,0 +1,1 @@
+export default function robots() { return { rules: { userAgent: "*", allow: "/", disallow: "/thank-you" }, sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || "https://craigtlogistics.co.za"}/sitemap.xml` }; }
